@@ -1,0 +1,20 @@
+{
+  "name": "timeline-app",
+  "description": "## The idea:",
+  "main": "index.js",
+  "authors": [
+    "Nick Mertens <nick@thecrypt.co.nz>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "^3.4.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "timeline-app",
+  "version": "1.0.0",
+  "description": "## The idea:",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://cryptacular@bitbucket.org/cryptacular/timeline-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/cryptacular/timeline-app#readme"
+}
