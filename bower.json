@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "knockout": "^3.4.0"
+    "knockout": "^3.4.0",
+    "jquery": "^2.2.3"
   }
 }

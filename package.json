@@ -12,5 +12,11 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/cryptacular/timeline-app#readme"
+  "homepage": "https://bitbucket.org/cryptacular/timeline-app#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3"
+  }
 }
