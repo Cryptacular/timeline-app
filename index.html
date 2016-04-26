@@ -10,7 +10,8 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="/dist/css/vendor.css">
+        <!-- <link rel="stylesheet" href="/dist/css/normalize.min.css"> -->
+        <link rel="stylesheet" href="/public/components/spectre.css/dist/spectre.min.css" media="screen" title="spectre.css" charset="utf-8">
         <link rel="stylesheet" href="/dist/css/app.min.css">
         <script src="/public/vendor/modernizr-2.8.3.min.js"></script>
     </head>
@@ -18,15 +19,30 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        <section class="container bg-grey">
+          <section class="section-introduction grid-hero grid-960">
 
-        <h1>Timeline</h1>
+            <h1>Timeline</h1>
 
-        <p>Ohai, planet Earth!</p>
+            <p>An app for creating a record of all the things on a timeline.</p>
+
+            <p><a href="#" class="btn btn-primary btn-lg">Sign Up!</a> <a class="btn btn-lg" data-bind="click: loginUser">Log In</a></p>
+
+          </section>
+        </section>
+
+        <section class="section-timelines" data-bind="">
+          <section class="section-timeline">
+            <ul class="timeline" data-bind="foreach: events">
+              <li class="timeline-event"><strong data-bind="text: date"></strong> <span data-bind="text: name"></span></li>
+            </ul>
+          </section>
+        </section>
 
         <!-- Scripts -->
         <script src="/public/components/jquery/dist/jquery.min.js"></script>
         <script src="/public/components/knockout/dist/knockout.js"></script>
-        <script src="/dist/js/app.js"></script>
+        <script src="/dist/js/app.min.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
         <!-- <script>
