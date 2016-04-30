@@ -16,6 +16,27 @@ var concatCss = require('gulp-concat-css');
 var cssnano = require('gulp-cssnano');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
+var nunjucks = require('gulp-nunjucks');
+var gulpIgnore = require('gulp-ignore');
+
+// Copying static files to dist folder
+gulp.task('static', function() {
+  gulp.src(['public/**/*'])
+    .pipe(gulp.dest('dist/public'));
+  gulp.src(['root/**/*'])
+    .pipe(gulp.dest('dist'));
+});
+
+// Nunjucks (templating)
+gulp.task('nunjucks', function() {
+	gulp.src('src/views/*.njk')
+    .pipe(gulpIgnore('_*'))
+		.pipe(nunjucks.compile())
+    .pipe(rename(function (path) {
+        path.extname = ".html";
+      }))
+		.pipe(gulp.dest('dist'));
+});
 
 // JS hint
 gulp.task('jshint', function() {
@@ -85,6 +106,10 @@ gulp.task('images', function() {
 
 // Watch Task
 gulp.task('watch', function() {
+  // Watch static files
+  gulp.watch(['public/**/*', 'root/**/*'], ['static']);
+  // Watch .html files
+  gulp.watch('src/views/*.njk', ['nunjucks']);
   // Watch .js files
   gulp.watch('src/js/*.js', ['jshint', 'scripts']);
   // Watch .scss files
@@ -96,7 +121,7 @@ gulp.task('watch', function() {
 });
 
 // Production Task
-gulp.task('default', ['jshint', 'scripts', 'css', 'sass', 'images', 'watch']);
+gulp.task('default', ['static', 'nunjucks', 'jshint', 'scripts', 'css', 'sass', 'images', 'watch']);
 
 // Dev Task
 gulp.task('debug', ['scriptsDebug', ]);

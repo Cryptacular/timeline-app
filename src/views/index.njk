@@ -1,0 +1,23 @@
+{% extends "_layout.njk" %}
+
+{% block content %}
+  <section class="container bg-grey">
+    <section class="section-introduction grid-hero grid-960">
+
+      <h1>Timeline</h1>
+
+      <p>An app for creating a record of all the things on a timeline.</p>
+
+      <p><a href="#" class="btn btn-primary btn-lg">Sign Up!</a> <a class="btn btn-lg" data-bind="click: loginUser">Log In</a></p>
+
+    </section>
+  </section>
+
+  <section class="section-timelines" data-bind="">
+    <section class="section-timeline">
+      <ul class="timeline" data-bind="foreach: events">
+        <li class="timeline-event"><strong data-bind="text: date"></strong> <span data-bind="text: name"></span></li>
+      </ul>
+    </section>
+  </section>
+{% endblock %}
