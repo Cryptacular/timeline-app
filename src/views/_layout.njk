@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Time Line</title>
+        <title>Time Lines</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,10 +15,33 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        {% block content %}
-
+        {% block header %}
+          <header class="section-header container">
+            <div class="columns">
+              <div class="logo-container column col-md-4">
+                <h1 class="logo">Time Lines</h1>
+              </div>
+              <nav class="section-navigation column col-md-8 text-right">
+                <ul class="nav">
+                  <li class="nav-item active">
+                      <a href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#">Sign Up</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#">Account</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </header>
         {% endblock %}
+
+        {% block content %}{% endblock %}
 
         <!-- Scripts -->
         <script src="public/components/jquery/dist/jquery.min.js"></script>

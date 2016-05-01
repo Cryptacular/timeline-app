@@ -1,6 +1,51 @@
 // Variables
 $lightgrey: #e7e7e7;
+$darkgrey: #333;
+$primarylight: #e7e7e7;
+$primarydark: #333;
 
+// Typography
+a {
+  &:link, &:visited {
+    color: $primarydark;
+    text-decoration: none;
+  }
+}
+
+// Header
+.section-header {
+  background-color: $darkgrey;
+  color: $primarylight;
+  a {
+    &:link, &:visited {
+      color: $primarylight;
+    }
+  }
+}
+
+.logo {
+  font-size: 2.8rem;
+  margin: 0;
+  padding: 1.2rem;
+}
+
+// Navigation
+.nav {
+  display: inline-block;
+  list-style: none;
+  margin: .5rem 0;
+  padding: 1.2rem;
+  .nav-item {
+    display: inline-block;
+    margin: 0;
+    &:not(:last-child)::after {
+      content: "/";
+      padding: 0 .4rem;
+    }
+  }
+}
+
+// Hero section
 .grid-hero {
   margin-top: 10rem;
   margin-bottom: 10rem;
