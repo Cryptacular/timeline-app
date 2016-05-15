@@ -11,15 +11,18 @@
     </section>
   </section> #}
 
-  <section class="section-timelines" data-bind="">
-    <section class="section-timeline">
+  <section class="section-timelines" data-bind="foreach: categories">
+    <div class="timeline-category">
+      <h2 data-bind="text: name"></h2>
+      <p data-bind="text: color"></p>
       <ul class="timeline" data-bind="foreach: events">
         <li class="timeline-event">
-          <div class="timeline-event--date" data-bind="text: dateString"></div>
-          <div class="timeline-event--name" data-bind="text: name"></div>
-          <div class="timeline-event--description" data-bind="text: description"></div>
+          <span class="timeline-event--id" data-bind="text: id"></span>
+          <span class="timeline-event--date" data-bind="text: dateString"></span>
+          <span class="timeline-event--name" data-bind="text: name"></span>
+          <span class="timeline-event--description" data-bind="text: description"></span>
         </li>
       </ul>
-    </section>
+    </div>
   </section>
 {% endblock %}
