@@ -8,6 +8,7 @@ function TimelineEvent(data) {
   self.name = ko.observable(data.name || "Event");
   self.date = ko.observable(data.date || new Date());
   self.description = ko.observable(data.description || "Description");
+  self.isDeleted = ko.observable(data.isDeleted || false);
 
   this.dateString = ko.computed(function() {
     var day = self.date().getDate() + 1;
@@ -29,62 +30,49 @@ function TimelineCategory(data) {
 function TimelineViewModel() {
   var self = this;
 
-  // Non-editable catalog data - would come from the server
-  self.categories = [
-    new TimelineCategory({ id: 0, name: "Default", color: 0, events: [
+  // Editable data
+  self.categories = ko.observableArray([
+    new TimelineCategory({ id: 0, name: "Default", color: '#DD3333', events: [
       new TimelineEvent({
         id: 0,
         name: "Started work",
         date: new Date(2016, 4, 25),
         description: "Started working on this weird but cool thingymajig.",
-        categoryId: 0
+        isDeleted: false
       }),
       new TimelineEvent({
         id: 1,
         name: "Committed changes",
         date: new Date(2016, 4, 26),
         description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
-        categoryId: 0
+        isDeleted: false
       })
     ]}),
-    new TimelineCategory({ id: 1, name: "Work", color: 1, events: [
+    new TimelineCategory({ id: 1, name: "Work", color: '#3333DD', events: [
       new TimelineEvent({
-        id: 2,
+        id: 0,
         name: "First day",
         date: new Date(2016, 1, 11),
         description: "First day on the job at Fisher & Paykel.",
-        categoryId: 1
+        isDeleted: false
       }),
       new TimelineEvent({
-        id: 3,
-        name: "Became Scrum Master",
+        id: 1,
+        name: "First day",
+        date: new Date(2016, 1, 11),
+        description: "First day on the job at Fisher & Paykel.",
+        isDeleted: true
+      }),
+      new TimelineEvent({
+        id: 2,
+        name: "Scrum Master",
         date: new Date(2016, 3, 4),
         description: "I was appointed as Scrum Master! Though I basically put up my own hand.",
-        categoryId: 1
+        isDeleted: false
       })
-    ]})
-  ];
-
-  // Editable data
-  // self.events = ko.observableArray([
-  //   new TimelineEvent({
-  //     category: self.categories[0],
-  //     name: "Started work",
-  //     date: new Date(2016, 4, 25),
-  //     description: "Started working on this weird but cool thingymajig."
-  //   }),
-  //   new TimelineEvent({
-  //     category: self.categories[1],
-  //     name: "Committed changes",
-  //     date: new Date(2016, 4, 26),
-  //     description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits."
-  //   })
-  // ]);
-
-  // Methods
-  self.loginUser = function() {
-    self.user.isLoggedIn(true);
-  };
+    ]}),
+    new TimelineCategory({ id: 2, name: "Empty", color: '#3333DD'})
+  ]);
 }
 
 // Bindings
