@@ -71,8 +71,13 @@ function TimelineViewModel() {
         isDeleted: false
       })
     ]}),
-    new TimelineCategory({ id: 2, name: "Empty", color: '#3333DD'})
+    new TimelineCategory({ id: 2, name: "Empty", color: '#33DD33'})
   ]);
+
+  // Methods
+  self.addEvent = function() {
+
+  };
 }
 
 // Bindings

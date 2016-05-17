@@ -11,10 +11,10 @@
     </section>
   </section> #}
 
-  <section class="section-timelines" data-bind="foreach: categories">
-    <!-- ko if: events().length > 0 -->
+  <section class="section-timelines grid-960" data-bind="foreach: categories">
     <div class="timeline-category">
       <h2 data-bind="text: name, style: { color: color }"></h2>
+      <!-- ko if: events().length > 0 -->
       <ul class="timeline" data-bind="foreach: events">
         <!-- ko ifnot: isDeleted -->
         <li class="timeline-event">
@@ -24,7 +24,10 @@
         </li>
         <!-- /ko -->
       </ul>
+      <!-- /ko -->
+      <!-- ko ifnot: events().length > 0 -->
+      <a href="#" data-bind="click: addEvent">Add an event</a>
+      <!-- /ko -->
     </div>
-    <!-- /ko -->
   </section>
 {% endblock %}
