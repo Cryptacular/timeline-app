@@ -10,7 +10,9 @@
 
     </section>
   </section> #}
-
+  <div class="canvas">
+    <canvas id="demoCanvas" width="300" height="50"></canvas>
+  </div>
   <section class="section-timelines grid-960" data-bind="foreach: categories">
     <div class="timeline-category">
       <h2 data-bind="text: name, style: { color: color }"></h2>
@@ -26,7 +28,7 @@
       </ul>
       <!-- /ko -->
       <!-- ko ifnot: events().length > 0 -->
-      <a href="#" data-bind="click: addEvent">Add an event</a>
+      <a href="#">Add an event</a>
       <!-- /ko -->
     </div>
   </section>

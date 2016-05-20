@@ -17,6 +17,7 @@
   "dependencies": {
     "knockout": "^3.4.0",
     "jquery": "^2.2.3",
-    "spectre.css": "*"
+    "spectre.css": "*",
+    "EaselJS": "^0.8.2"
   }
 }
