@@ -10,9 +10,6 @@
 
     </section>
   </section> #}
-  <div class="canvas">
-    <canvas id="demoCanvas" width="300" height="50"></canvas>
-  </div>
   <section class="section-timelines grid-960" data-bind="foreach: categories">
     <div class="timeline-category">
       <h2 data-bind="text: name, style: { color: color }"></h2>
@@ -20,6 +17,7 @@
       <ul class="timeline" data-bind="foreach: events">
         <!-- ko ifnot: isDeleted -->
         <li class="timeline-event">
+          <canvas width="12" height="12" data-bind="attr: {'id': 'timeline-canvas--' + id}, event: $root.paintCanvasForEvent(id, $parent.color())"></canvas>
           <span class="timeline-event--date" data-bind="text: dateString"></span>
           <span class="timeline-event--name" data-bind="text: name"></span>
           <span class="timeline-event--description" data-bind="text: description"></span>

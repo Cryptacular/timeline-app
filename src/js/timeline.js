@@ -50,21 +50,21 @@ function TimelineViewModel() {
     ]}),
     new TimelineCategory({ id: 1, name: "Work", color: '#3333DD', events: [
       new TimelineEvent({
-        id: 0,
+        id: 2,
         name: "First day",
         date: new Date(2016, 1, 11),
         description: "First day on the job at Fisher & Paykel.",
         isDeleted: false
       }),
       new TimelineEvent({
-        id: 1,
+        id: 3,
         name: "First day",
         date: new Date(2016, 1, 11),
         description: "First day on the job at Fisher & Paykel.",
         isDeleted: true
       }),
       new TimelineEvent({
-        id: 2,
+        id: 4,
         name: "Scrum Master",
         date: new Date(2016, 3, 4),
         description: "I was appointed as Scrum Master! Though I basically put up my own hand.",
@@ -75,6 +75,18 @@ function TimelineViewModel() {
   ]);
 
   // Methods
+  self.paintCanvasForEvent = function(id, color) {
+    var stage = new createjs.Stage("timeline-canvas--" + id);
+
+    // Circle
+    var circle = new createjs.Shape();
+    circle.graphics.beginFill(color).drawCircle(6, 6, 6);
+
+    // Update stage
+    stage.addChild(circle);
+    stage.update();
+  };
+
   self.addEvent = function() {
 
   };
