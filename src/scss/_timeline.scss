@@ -19,12 +19,14 @@
   position: absolute;
   top: 1.5em;
   left: -0.5em;
+  width: auto;
   z-index: 2;
 
   background: $darkgrey;
+  border-radius: 0.25em;
   color: $lightgrey;
   padding: 0.5em 1em;
-  border-radius: 0.25em;
+  white-space: normal;
 
   transition: opacity $defaulttransition;
 
@@ -51,6 +53,7 @@
 
   &.active {
     opacity: 1;
+    width: 25em;
     z-index: 3;
 
     .timeline-event--details {

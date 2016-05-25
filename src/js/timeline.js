@@ -173,7 +173,14 @@ function TimelineViewModel() {
   };
 
   self.showEventDetails = function(id) {
-    $("#timeline-details--" + id).toggleClass('active');
+    var clicked = $("#timeline-details--" + id);
+    var currentlyEnabled = clicked.hasClass('active');
+
+    $(".timeline-event--bubble.active").removeClass('active');
+
+    if (!currentlyEnabled) {
+      clicked.toggleClass('active');
+    }
   };
 
   self.addEvent = function() {
