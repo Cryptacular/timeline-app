@@ -21,5 +21,19 @@
     "EaselJS": "^0.8.2",
     "underscore": "^1.8.3",
     "moment": "^2.13.0"
+  },
+  "overrides": {
+    "jquery": {
+      "main": "dist/jquery.min.js"
+    },
+    "moment": {
+      "main": "min/moment.min.js"
+    },
+    "spectre.css": {
+      "main": "dist/spectre.min.css"
+    },
+    "underscore": {
+      "main": "underscore-min.js"
+    }
   }
 }

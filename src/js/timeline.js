@@ -52,20 +52,34 @@ function TimelineViewModel() {
         date: new Date(2016, 4, 26),
         description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
         isDeleted: false
+      }),
+      new TimelineEvent({
+        id: 5,
+        name: "Made some other changes",
+        date: new Date(2016, 4, 28),
+        description: "Doing things and stuff yup.",
+        isDeleted: false
+      }),
+      new TimelineEvent({
+        id: 6,
+        name: "Undid stuff",
+        date: new Date(2016, 5, 1),
+        description: "Ctrl+Z and all that jazz.",
+        isDeleted: false
       })
     ]}),
     new TimelineCategory({ id: 1, name: "Work", color: '#3333DD', events: [
       new TimelineEvent({
         id: 2,
         name: "First day",
-        date: new Date(2016, 1, 11),
+        date: new Date(2016, 2, 27),
         description: "First day on the job at Fisher & Paykel.",
         isDeleted: false
       }),
       new TimelineEvent({
         id: 3,
         name: "First day",
-        date: new Date(2016, 1, 11),
+        date: new Date(2016, 2, 28),
         description: "First day on the job at Fisher & Paykel.",
         isDeleted: true
       }),

@@ -18,6 +18,7 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var nunjucks = require('gulp-nunjucks');
 var gulpIgnore = require('gulp-ignore');
+var mainBowerFiles = require('main-bower-files');
 
 // Debug or not
 var debug = false;
@@ -32,10 +33,16 @@ gulp.task('disableDebug', function() {
 
 // Copying static files to dist folder
 gulp.task('static', function() {
-  gulp.src(['src/public/**/*'])
+  gulp.src(['src/public/vendor/*'])
     .pipe(gulp.dest('dist/public'));
   gulp.src(['src/root/**/*'])
     .pipe(gulp.dest('dist'));
+});
+
+// Bower components
+gulp.task('bower', function() {
+  return gulp.src(mainBowerFiles(), { base: 'src/public/components' })
+    .pipe(gulp.dest('dist/public/components'));
 });
 
 // Nunjucks (templating)
@@ -132,7 +139,7 @@ gulp.task('watch', function() {
 });
 
 // Production Task
-gulp.task('default', ['static', 'nunjucks', 'jshint', 'scripts', 'css', 'sass', 'images', 'watch']);
+gulp.task('default', ['static', 'bower', 'nunjucks', 'jshint', 'scripts', 'css', 'sass', 'images', 'watch']);
 
 // Dev Task
 gulp.task('debug', ['enableDebug', 'default']);
