@@ -1,5 +1,12 @@
-// Colours
+// Main colours
+$primarylight: #FFB278;
+$primarydark: #7D203A;
+
+// Generic colours
 $lightgrey: #e7e7e7;
+$lightgreyalpha: rgba(231, 231, 231, 0.5);
 $darkgrey: #333;
-$primarylight: #e7e7e7;
-$primarydark: #333;
+$darkgreyalpha: rgba(51, 51, 51, 0.5);
+
+// Transitions
+$defaulttransition: 0.3s ease;

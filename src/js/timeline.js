@@ -1,6 +1,3 @@
-// Defaults
-var defaultCategory = { name: "Default", color: 0 };
-
 // Models
 function TimelineEvent(data) {
   var self = this;
@@ -24,6 +21,15 @@ function TimelineCategory(data) {
   self.name = ko.observable(data.name || "New Category");
   self.color = ko.observable(data.color || 0);
   self.events = ko.observableArray(data.events || null);
+}
+
+function TimelineScaling(multiplier) {
+  var self = this;
+  var defaultScale = 4;
+  self.multiplier = multiplier || 1;
+  self.scaling = ko.computed(function() {
+    return self.multiplier * defaultScale;
+  });
 }
 
 // ViewModel
@@ -74,9 +80,12 @@ function TimelineViewModel() {
     new TimelineCategory({ id: 2, name: "Empty", color: '#33DD33'})
   ]);
 
+  self.scaling = ko.observable(new TimelineScaling(1));
+
   // Methods
-  self.paintCanvasForEvent = function(id, color) {
-    var stage = new createjs.Stage("timeline-canvas--" + id);
+  self.paintDotForEvent = function(eventId, color) {
+    // Find stage to draw canvas
+    var stage = new createjs.Stage("timeline-dot--" + eventId);
 
     // Circle
     var circle = new createjs.Shape();
@@ -85,6 +94,86 @@ function TimelineViewModel() {
     // Update stage
     stage.addChild(circle);
     stage.update();
+  };
+
+  self.paintLineForEvent = function(categoryId, eventId, color) {
+    var currentCategory = _.findWhere(self.categories(), { id: categoryId });
+    var currentEvent = _.findWhere(currentCategory.events(), { id: eventId });
+
+    if (self.hasNextEvent(currentCategory, currentEvent)) {
+      var timeToNextEvent = self.findTimeToNextEvent(categoryId, eventId);
+
+      // Find stage to draw canvas
+      var stage = new createjs.Stage("timeline-line--" + eventId);
+
+      // Circle
+      var line = new createjs.Shape();
+      line.graphics.beginFill(color).drawRect(0, 3, timeToNextEvent, 6); // x, y, width, height
+
+      // Update stage
+      stage.addChild(line);
+      stage.update();
+    }
+  };
+
+  self.getCategory = function(categoryId) {
+    return _.findWhere(self.categories(), { id: categoryId });
+  };
+
+  self.getEvent = function(categoryId, eventId) {
+    var category = self.getCategory(categoryId);
+    return _.findWhere(category.events(), { id: eventId });
+  };
+
+  self.getEventIndex = function(currentCategory, currentEvent) {
+    return _.indexOf(currentCategory.events(), currentEvent);
+  };
+
+  self.hasNextEvent = function(currentCategory, currentEvent) {
+    var currentEventIndex = self.getEventIndex(currentCategory, currentEvent);
+
+    if (currentCategory.events().length > currentEventIndex + 1) {
+      return true;
+    }
+
+    return false;
+  };
+
+  self.findTimeToNextEvent = function(categoryId, eventId) {
+    var currentCategory = self.getCategory(categoryId);
+    var currentEvent = self.getEvent(categoryId, eventId);
+
+    if (self.hasNextEvent(currentCategory, currentEvent)) {
+      var nextEvent = self.getNextEvent(currentCategory, currentEvent);
+
+      var timeDifferenceInMilliseconds = nextEvent.date() - currentEvent.date();
+      var scaling = self.scaling().scaling() * timeDifferenceInMilliseconds / 3600000;
+
+      return Math.floor(scaling);
+    }
+
+    return 0;
+  };
+
+  self.getNextEvent = function(currentCategory, currentEvent) {
+    var currentEventIndex = self.getEventIndex(currentCategory, currentEvent);
+    var nextEvent;
+    var nextEventIndex = currentEventIndex + 1;
+
+    if (self.hasNextEvent(currentCategory, currentEventIndex)) {
+      while (nextEvent === undefined || nextEvent.isDeleted() === true) {
+        nextEvent = currentCategory.events()[nextEventIndex];
+        nextEventIndex++;
+      }
+    } else {
+      return null;
+    }
+
+    return nextEvent;
+  };
+
+  self.showEventDetails = function(id) {
+    $("#timeline-details--" + id).toggleClass('active');
   };
 
   self.addEvent = function() {

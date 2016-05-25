@@ -19,11 +19,22 @@ var cache = require('gulp-cache');
 var nunjucks = require('gulp-nunjucks');
 var gulpIgnore = require('gulp-ignore');
 
+// Debug or not
+var debug = false;
+
+gulp.task('enableDebug', function() {
+  debug = true;
+});
+
+gulp.task('disableDebug', function() {
+  debug = false;
+});
+
 // Copying static files to dist folder
 gulp.task('static', function() {
-  gulp.src(['public/**/*'])
+  gulp.src(['src/public/**/*'])
     .pipe(gulp.dest('dist/public'));
-  gulp.src(['root/**/*'])
+  gulp.src(['src/root/**/*'])
     .pipe(gulp.dest('dist'));
 });
 
@@ -57,7 +68,7 @@ gulp.task('scripts', function() {
     return gulp.src('src/js/*.js')
       .pipe(concat('app.js'))
       .pipe(rename({suffix: '.min'}))
-      .pipe(uglify())
+      // .pipe(uglify())
       .pipe(gulp.dest('dist/js'));
 });
 
@@ -107,7 +118,7 @@ gulp.task('images', function() {
 // Watch Task
 gulp.task('watch', function() {
   // Watch static files
-  gulp.watch(['public/**/*', 'root/**/*'], ['static']);
+  gulp.watch(['src/public/**/*', 'src/root/**/*'], ['static']);
   // Watch .html files
   gulp.watch('src/views/*.njk', ['nunjucks']);
   // Watch .js files
@@ -124,4 +135,4 @@ gulp.task('watch', function() {
 gulp.task('default', ['static', 'nunjucks', 'jshint', 'scripts', 'css', 'sass', 'images', 'watch']);
 
 // Dev Task
-gulp.task('debug', ['scriptsDebug', ]);
+gulp.task('debug', ['enableDebug', 'default']);

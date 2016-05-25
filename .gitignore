@@ -1,6 +1,6 @@
 archive
 node_modules
-public/components/*
+src/public/components/*
 *.log
 dist
 .sass-cache

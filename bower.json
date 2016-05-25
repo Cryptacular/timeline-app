@@ -18,6 +18,8 @@
     "knockout": "^3.4.0",
     "jquery": "^2.2.3",
     "spectre.css": "*",
-    "EaselJS": "^0.8.2"
+    "EaselJS": "^0.8.2",
+    "underscore": "^1.8.3",
+    "moment": "^2.13.0"
   }
 }
