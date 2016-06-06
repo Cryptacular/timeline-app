@@ -13,24 +13,27 @@
   <section class="section-timelines" data-bind="foreach: categories">
     <div class="timeline-category">
       <h2 data-bind="text: name, style: { color: color }"></h2>
-      <!-- ko if: events().length > 0 -->
-      <ul class="timeline timeline-list" data-bind="foreach: events">
-        <!-- ko ifnot: isDeleted -->
-        <li class="timeline-event">
-          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-dot--' + id }, event: $root.paintDotForEvent(id, $parent.color()), click: $root.showEventDetails(id)"></canvas>
-          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-line--' + id, 'width': $root.findTimeToNextEvent($parent.id, id) }, event: $root.paintLineForEvent($parent.id, id, $parent.color())"></canvas>
-          <div class="timeline-event--bubble" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.showEventDetails(event.id) }">
-            <span class="timeline-event--date" data-bind="text: dateString"></span>
-            <div class="timeline-event--details">
-              <p class="timeline-event--name" data-bind="text: name"></p>
-              <p class="timeline-event--description" data-bind="text: description"></p>
+      <!-- ko if: dates().length > 0 -->
+      <ul class="timeline timeline-list" data-bind="foreach: dates">
+        <li class="timeline-date">
+          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-dot--' + id }, event: $root.paintDotForDate(id, $parent.color()), click: $root.toggleDateDetails(id)"></canvas>
+          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-line--' + id, 'width': $root.findTimeToNextDate($parent.id, id) }, event: $root.paintLineForDate($parent.id, id, $parent.color())"></canvas>
+          <div class="timeline-date--bubble" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.toggleDateDetails(event.id) }">
+            <span class="timeline-date--date" data-bind="text: dateString"></span>
+            <div class="timeline-date--events" data-bind="foreach: events">
+              <!-- ko ifnot: isDeleted -->
+              <div class="timeline-event timeline-event--details">
+                <p class="timeline-event timeline-event--time" data-bind="text: timeString"></p>
+                <p class="timeline-event timeline-event--name" data-bind="text: name"></p>
+                <p class="timeline-event timeline-event--description" data-bind="text: description"></p>
+              </div>
+              <!-- /ko -->
             </div>
           </div>
         </li>
-        <!-- /ko -->
       </ul>
       <!-- /ko -->
-      <!-- ko ifnot: events().length > 0 -->
+      <!-- ko ifnot: dates().length > 0 -->
       <a href="#">Add an event</a>
       <!-- /ko -->
     </div>
