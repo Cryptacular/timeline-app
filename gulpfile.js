@@ -136,7 +136,7 @@ gulp.task('watch', function() {
   // Watch .html files
   gulp.watch('src/views/*.njk', ['nunjucks']);
   // Watch .js files
-  gulp.watch('src/js/*.js', ['jshint', 'scripts']);
+  gulp.watch('src/js/**/*.js', ['jshint', 'scripts']);
   // Watch .scss files
   gulp.watch('src/scss/*.scss', ['sass']);
   // Watch .css files
