@@ -146,15 +146,50 @@ function TimelineViewModel() {
     //     isDeleted: false
     //   })
     ]}),
+    new TimelineCategory({ id: 1, name: "Work", color: '#33DD33', dates: [
+      new TimelineDate({
+        id: 0,
+        date: "25 May 2016",
+        events: [
+          new TimelineEvent({
+            id: 0,
+            name: "Started work",
+            time: "25 May 2016 16:53:49",
+            description: "Started working on this weird but cool thingymajig.",
+            isDeleted: false
+          }),
+          new TimelineEvent({
+            id: 0,
+            name: "Started work second title",
+            time: "25 May 2016 17:14:23",
+            description: "Started working more on this weird but cool thingymajig.",
+            isDeleted: false
+          })
+        ]
+      }),
+      new TimelineDate({
+        id: 1,
+        date: "26 May 2016",
+        events: [
+          new TimelineEvent({
+            id: 0,
+            name: "Committed changes",
+            time: "26 May 2016 16:53:49",
+            description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
+            isDeleted: false
+          })
+        ]
+      })
+    ]})
     // new TimelineCategory({ id: 2, name: "Empty", color: '#33DD33'})
   ]);
 
   self.scaling = ko.observable(new TimelineScaling(1));
 
   // Methods
-  self.paintDotForDate = function(dateId, color) {
+  self.paintDotForDate = function(categoryId, dateId, color) {
     // Find stage to draw canvas
-    var stage = new createjs.Stage("timeline-dot--" + dateId);
+    var stage = new createjs.Stage("timeline-dot--" + categoryId + "-" + dateId);
 
     // Circle
     var circle = new createjs.Shape();
@@ -173,7 +208,7 @@ function TimelineViewModel() {
       var timeToNextDate = self.findTimeToNextDate(categoryId, dateId);
 
       // Find stage to draw canvas
-      var stage = new createjs.Stage("timeline-line--" + dateId);
+      var stage = new createjs.Stage("timeline-line--" + categoryId + "-" + dateId);
 
       // Circle
       var line = new createjs.Shape();
@@ -247,13 +282,15 @@ function TimelineViewModel() {
     return nextDate;
   };
 
-  self.toggleDateDetails = function(id) {
-    var clicked = $("#timeline-details--" + id);
+  self.toggleDateDetails = function(categoryId, id) {
+    var clicked = $("#timeline-category--" + categoryId).find("#timeline-details--" + id);
     var isCurrentlyEnabled = clicked.hasClass('active');
 
-    $(".timeline-event--bubble.active").removeClass('active');
+    $(".timeline-date--bubble.active").removeClass('active');
 
-    clicked.toggleClass('active');
+    if (!isCurrentlyEnabled) {
+      clicked.toggleClass('active');
+    }
   };
 
   self.addEvent = function() {

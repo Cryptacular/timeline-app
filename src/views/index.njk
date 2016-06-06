@@ -11,14 +11,14 @@
     </section>
   </section> #}
   <section class="section-timelines" data-bind="foreach: categories">
-    <div class="timeline-category">
+    <div class="timeline-category" data-bind="attr: { 'id': 'timeline-category--' + id}">
       <h2 data-bind="text: name, style: { color: color }"></h2>
       <!-- ko if: dates().length > 0 -->
       <ul class="timeline timeline-list" data-bind="foreach: dates">
         <li class="timeline-date">
-          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-dot--' + id }, event: $root.paintDotForDate(id, $parent.color()), click: $root.toggleDateDetails(id)"></canvas>
-          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-line--' + id, 'width': $root.findTimeToNextDate($parent.id, id) }, event: $root.paintLineForDate($parent.id, id, $parent.color())"></canvas>
-          <div class="timeline-date--bubble" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.toggleDateDetails(event.id) }">
+          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-dot--' + $parent.id + '-' + id }, event: $root.paintDotForDate($parent.id, id, $parent.color()), click: $root.toggleDateDetails($parent.id, id)"></canvas>
+          <canvas width="12" height="12" data-bind="attr: { 'id': 'timeline-line--' + $parent.id + '-' + id, 'width': $root.findTimeToNextDate($parent.id, id) }, event: $root.paintLineForDate($parent.id, id, $parent.color())"></canvas>
+          <div class="timeline-date--bubble" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.toggleDateDetails($parent.id, event.id) }">
             <span class="timeline-date--date" data-bind="text: dateString"></span>
             <div class="timeline-date--events" data-bind="foreach: events">
               <!-- ko ifnot: isDeleted -->
