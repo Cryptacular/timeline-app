@@ -19,6 +19,13 @@ var cache = require('gulp-cache');
 var nunjucks = require('gulp-nunjucks');
 var gulpIgnore = require('gulp-ignore');
 var mainBowerFiles = require('main-bower-files');
+var clean = require('gulp-clean');
+
+// Cleaning 'dist' folder
+gulp.task('clean', function () {
+	return gulp.src('dist', {read: false})
+		.pipe(clean());
+});
 
 // Debug or not
 var debug = false;
@@ -34,7 +41,7 @@ gulp.task('disableDebug', function() {
 // Copying static files to dist folder
 gulp.task('static', function() {
   gulp.src(['src/public/vendor/*'])
-    .pipe(gulp.dest('dist/public'));
+    .pipe(gulp.dest('dist/public/vendor'));
   gulp.src(['src/root/**/*'])
     .pipe(gulp.dest('dist'));
 });
@@ -72,7 +79,7 @@ gulp.task('scriptsDebug', function() {
 
 // Concatenate & minify JS Files
 gulp.task('scripts', function() {
-    return gulp.src('src/js/*.js')
+    return gulp.src('src/js/**/*.js')
       .pipe(concat('app.js'))
       .pipe(rename({suffix: '.min'}))
       // .pipe(uglify())
@@ -140,6 +147,3 @@ gulp.task('watch', function() {
 
 // Production Task
 gulp.task('default', ['static', 'bower', 'nunjucks', 'jshint', 'scripts', 'css', 'sass', 'images', 'watch']);
-
-// Dev Task
-gulp.task('debug', ['enableDebug', 'default']);
