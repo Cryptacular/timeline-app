@@ -1,0 +1,15 @@
+.btn {
+  border-color: $primarydark;
+  color: $primarydark;
+
+  &.btn-primary {
+    background-color: $primarydark;
+    border: none;
+    color: $primarylight;
+
+    .navbar & {
+      background-color: $primarylight;
+      color: $primarydark;
+    }
+  }
+}

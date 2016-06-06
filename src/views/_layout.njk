@@ -1,61 +1,65 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Time Lines</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <link rel="stylesheet" href="public/components/spectre.css/dist/spectre.min.css" media="screen" title="spectre.css" charset="utf-8">
-        <link rel="stylesheet" href="css/app.min.css">
-        <script src="public/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        {% block header %}
-          <header class="section-header container">
-            <div class="columns">
-              <div class="logo-container column col-md-4">
-                <h1 class="logo">Time Lines</h1>
-              </div>
-              <nav class="section-navigation column col-md-8 text-right">
-                <ul class="nav">
-                  <li class="nav-item active">
-                      <a href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="#">Sign Up</a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="#">Login</a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="#">Account</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </header>
-        {% endblock %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Time Lines</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="public/components/spectre.css/dist/spectre.min.css" media="screen" title="spectre.css" charset="utf-8">
+    <link rel="stylesheet" href="css/app.min.css">
+    <script src="public/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.css" />
+  </head>
+  <body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    {% block header %}
+      <header class="navbar">
+        <section class="navbar-section">
+          <a href="#" class="navbar-brand">Time Lines</a>
+        </section>
+        <section class="navbar-section">
+          <a href="#" class="btn btn-link">About</a>
+          <a href="#" class="btn btn-link">Help</a>
+          <a href="#" class="btn btn-link">Account</a>
+          <a href="/app.html" class="btn btn-link">Log In</a>
+          <a href="#" class="btn btn-primary">Sign Up</a>
+        </section>
+      </header>
+    {% endblock %}
 
-        {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
-        <!-- Scripts -->
-        <script src="public/components/jquery/dist/jquery.min.js"></script>
-        <script src="public/components/underscore/underscore-min.js"></script>
-        <script src="public/components/moment/min/moment.min.js"></script>
-        <script src="public/components/knockout/dist/knockout.js"></script>
-        <script src="public/components/EaselJS/lib/easeljs-0.8.2.combined.js"></script>
-        <script src="js/app.min.js"></script>
+    <!-- Scripts -->
+    <script src="public/components/jquery/dist/jquery.min.js"></script>
+    <script src="public/components/underscore/underscore-min.js"></script>
+    <script src="public/components/moment/min/moment.min.js"></script>
+    <script src="public/components/knockout/dist/knockout.js"></script>
+    <script src="public/components/EaselJS/lib/easeljs-0.8.2.combined.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCKfKc2x4UMkPDNTcW4Elh6EtwQAI33sGI",
+        authDomain: "timeline-app.firebaseapp.com",
+        databaseURL: "https://timeline-app.firebaseio.com",
+        storageBucket: "firebase-timeline-app.appspot.com",
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="js/app.min.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-        <!-- <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
-        </script>
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
-    </body>
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <!-- <script>
+        window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+        ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
+  </body>
 </html>

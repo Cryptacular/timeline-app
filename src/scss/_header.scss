@@ -1,31 +1,19 @@
-.section-header {
+.navbar {
   background-color: $primarydark;
   color: $primarylight;
-  a {
+
+  .btn.btn-link {
     &:link, &:visited {
+      color: #FFF;
+    }
+    &:hover, &:active {
       color: $primarylight;
     }
   }
-}
 
-.logo {
-  font-size: 2.8rem;
-  margin: 0;
-  padding: 1.2rem;
-}
-
-// Navigation
-.nav {
-  display: inline-block;
-  list-style: none;
-  margin: .5rem 0;
-  padding: 1.2rem;
-  .nav-item {
-    display: inline-block;
-    margin: 0;
-    &:not(:last-child)::after {
-      content: "/";
-      padding: 0 .4rem;
+  .navbar-brand {
+    &:link, &:visited {
+      color: $primarylight;
     }
   }
 }
