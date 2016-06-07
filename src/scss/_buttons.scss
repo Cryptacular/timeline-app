@@ -2,14 +2,31 @@
   border-color: $primarydark;
   color: $primarydark;
 
+  &:hover {
+    background-color: $primarydark;
+    border-color: $primarylight;
+    color: $primarylight;
+  }
+
   &.btn-primary {
     background-color: $primarydark;
     border: none;
     color: $primarylight;
-
-    .navbar & {
-      background-color: $primarylight;
-      color: $primarydark;
-    }
   }
+
+  &.btn-light {
+    background-color: $primarylight;
+    border: none;
+    color: $primarydark;
+  }
+
+  &.btn-dark {
+    border-color: $primarylight;
+    color: $primarylight;
+  }
+}
+
+.btn-group-block .btn {
+  margin-right: -4px;
+  width: 33.3%;
 }
