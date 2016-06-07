@@ -16,7 +16,7 @@ function TimelineViewModel() {
             isDeleted: false
           }),
           new TimelineEvent({
-            id: 0,
+            id: 1,
             name: "Started work second title",
             time: "25 May 2016 17:14:23",
             description: "Started working more on this weird but cool thingymajig.",
@@ -29,7 +29,7 @@ function TimelineViewModel() {
         date: "26 May 2016",
         events: [
           new TimelineEvent({
-            id: 0,
+            id: 2,
             name: "Committed changes",
             time: "26 May 2016 16:53:49",
             description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
@@ -42,7 +42,7 @@ function TimelineViewModel() {
         date: "28 May 2016",
         events: [
           new TimelineEvent({
-            id: 0,
+            id: 3,
             name: "Made some other changes",
             time: "28 May 2016 16:53:49",
             description: "Doing things and stuff yup.",
@@ -55,51 +55,14 @@ function TimelineViewModel() {
         date: "1 June 2016",
         events: [
           new TimelineEvent({
-            id: 0,
+            id: 4,
             name: "Undid stuff",
             time: "1 June 2016 16:53:49",
             description: "Ctrl+Z and all that jazz.",
             isDeleted: false
           })
         ]
-      }),
-    //   new TimelineEvent({
-    //     id: 5,
-    //     name: "Made some other changes",
-    //     date: new Date(2016, 4, 28),
-    //     description: "Doing things and stuff yup.",
-    //     isDeleted: false
-    //   }),
-    //   new TimelineEvent({
-    //     id: 6,
-    //     name: "Undid stuff",
-    //     date: new Date(2016, 5, 1),
-    //     description: "Ctrl+Z and all that jazz.",
-    //     isDeleted: false
-    //   })
-    // ]}),
-    // new TimelineCategory({ id: 1, name: "Work", color: '#3333DD', events: [
-    //   new TimelineEvent({
-    //     id: 2,
-    //     name: "First day",
-    //     date: new Date(2016, 2, 27),
-    //     description: "First day on the job at Fisher & Paykel.",
-    //     isDeleted: false
-    //   }),
-    //   new TimelineEvent({
-    //     id: 3,
-    //     name: "First day",
-    //     date: new Date(2016, 2, 28),
-    //     description: "First day on the job at Fisher & Paykel.",
-    //     isDeleted: true
-    //   }),
-    //   new TimelineEvent({
-    //     id: 4,
-    //     name: "Scrum Master",
-    //     date: new Date(2016, 3, 4),
-    //     description: "I was appointed as Scrum Master! Though I basically put up my own hand.",
-    //     isDeleted: false
-    //   })
+      })
     ]}),
     new TimelineCategory({ id: 1, name: "Work", color: '#33DD33', dates: [
       new TimelineDate({
@@ -107,14 +70,14 @@ function TimelineViewModel() {
         date: "25 May 2016",
         events: [
           new TimelineEvent({
-            id: 0,
+            id: 5,
             name: "Started work",
             time: "25 May 2016 16:53:49",
             description: "Started working on this weird but cool thingymajig.",
             isDeleted: false
           }),
           new TimelineEvent({
-            id: 0,
+            id: 6,
             name: "Started work second title",
             time: "25 May 2016 17:14:23",
             description: "Started working more on this weird but cool thingymajig.",
@@ -127,7 +90,7 @@ function TimelineViewModel() {
         date: "26 May 2016",
         events: [
           new TimelineEvent({
-            id: 0,
+            id: 7,
             name: "Committed changes",
             time: "26 May 2016 16:53:49",
             description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
@@ -142,13 +105,46 @@ function TimelineViewModel() {
   self.scaling = ko.observable(new TimelineScaling(1));
 
   // Methods
+  self.paintAllEvents = function() {
+    var categories,
+        totalCategories,
+        categoryId,
+        categoryColor,
+        dates,
+        totalDates,
+        dateId,
+        events,
+        totalEvents,
+        eventId,
+        currentEvent;
+
+    categories = self.categories();
+    totalCategories = categories.length;
+
+    for (var categoryIndex = 0; categoryIndex < totalCategories; categoryIndex++) {
+      categoryId = categories[categoryIndex].id;
+      categoryColor = categories[categoryIndex].color();
+      dates = categories[categoryIndex].dates();
+      totalDates = dates.length;
+
+      for (var dateIndex = 0; dateIndex < totalDates; dateIndex++) {
+        dateId = dates[dateIndex].id;
+        events = dates[dateIndex].events();
+        totalEvents = events.length;
+
+        self.paintDotForDate(categoryId, dateId, categoryColor);
+        self.paintLineForDate(categoryId, dateId, categoryColor);
+      }
+    }
+  };
+
   self.paintDotForDate = function(categoryId, dateId, color) {
     // Find stage to draw canvas
     var stage = new createjs.Stage("timeline-dot--" + categoryId + "-" + dateId);
 
     // Circle
     var circle = new createjs.Shape();
-    circle.graphics.beginFill(color).drawCircle(6, 6, 6);
+    circle.graphics.beginFill(color).drawCircle(4, 4, 4);
 
     // Update stage
     stage.addChild(circle);
@@ -167,7 +163,7 @@ function TimelineViewModel() {
 
       // Circle
       var line = new createjs.Shape();
-      line.graphics.beginFill(color).drawRect(0, 3, timeToNextDate, 6); // x, y, width, height
+      line.graphics.beginFill(color).drawRect(0, 2, timeToNextDate, 4); // x, y, width, height
 
       // Update stage
       stage.addChild(line);
@@ -250,6 +246,13 @@ function TimelineViewModel() {
 
   self.addEvent = function() {
 
+  };
+
+  self.changeScaling = function(multiplier) {
+    if (multiplier > 0) {
+      self.scaling().multiplier(multiplier);
+      self.paintAllEvents();
+    }
   };
 }
 
