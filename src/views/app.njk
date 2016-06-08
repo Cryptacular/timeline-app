@@ -1,47 +1,55 @@
 {% extends "_layout.njk" %}
 
 {% block content %}
-  <section class="section-scaling grid grid-960">
-    <h1>Scaling</h1>
-    <div class="btn-group">
-      <button class="btn btn-dark" data-bind="click: function(event) { $root.changeScaling(1) }">1</button>
-      <button class="btn btn-dark" data-bind="click: function(event) { $root.changeScaling(2) }">2</button>
-      <button class="btn btn-dark" data-bind="click: function(event) { $root.changeScaling(3) }">3</button>
-    </div>
-  </section>
-  <section class="section-timelines" data-bind="foreach: categories">
-    <div class="timeline-category" data-bind="attr: { 'id': 'timeline-category--' + id}">
-      <h2 data-bind="text: name, style: { color: color }"></h2>
-      <!-- ko if: dates().length > 0 -->
-      <ul class="timeline timeline-list" data-bind="foreach: dates">
-        <li class="timeline-date">
-          <canvas width="8" height="8" class="clickable" data-bind="attr: { 'id': 'timeline-dot--' + $parent.id + '-' + id }, event: $root.paintDotForDate($parent.id, id, $parent.color()), click: $root.toggleDateDetails($parent.id, id)"></canvas>
-          <canvas width="0" height="8" data-bind="attr: { 'id': 'timeline-line--' + $parent.id + '-' + id, 'width': $root.findTimeToNextDate($parent.id, id) }, event: $root.paintLineForDate($parent.id, id, $parent.color())"></canvas>
-          <div class="card timeline-date--bubble clickable" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.toggleDateDetails($parent.id, event.id) }">
-            <div class="card-header">
-              <span class="timeline-date--date" data-bind="text: dateString"></span>
-            </div>
-            <div class="card-body timeline-date--events" data-bind="foreach: events">
-              <!-- ko ifnot: isDeleted -->
-              <div class="timeline-event timeline-event--details">
-                <p class="card-meta timeline-event timeline-event--time" data-bind="text: timeString"></p>
-                <p class="card-title timeline-event timeline-event--name" data-bind="text: name"></p>
-                <p class="timeline-event timeline-event--description" data-bind="text: description"></p>
+  <section class="section-timelines">
+    <div class="timeline-categories" data-bind="foreach: categories">
+      <div class="timeline-category" data-bind="attr: { 'id': 'timeline-category--' + id}">
+        <h2 data-bind="text: name, style: { color: color }"></h2>
+        <!-- ko if: dates().length > 0 -->
+        <ul class="timeline timeline-list" data-bind="foreach: dates">
+          <li class="timeline-date">
+            <canvas width="8" height="8" class="clickable" data-bind="attr: { 'id': 'timeline-dot--' + $parent.id + '-' + id }, event: $root.paintDotForDate($parent.id, id, $parent.color()), click: $root.toggleDateDetails($parent.id, id)"></canvas>
+            <canvas width="0" height="8" data-bind="attr: { 'id': 'timeline-line--' + $parent.id + '-' + id, 'width': $root.findTimeToNextDate($parent.id, id) }, event: $root.paintLineForDate($parent.id, id, $parent.color())"></canvas>
+            <div class="card timeline-date--bubble clickable" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.toggleDateDetails($parent.id, event.id) }">
+              <div class="card-header">
+                <span class="timeline-date--date" data-bind="text: dateString"></span>
               </div>
-              <!-- /ko -->
+              <div class="card-body timeline-date--events" data-bind="foreach: events">
+                <!-- ko ifnot: isDeleted -->
+                <div class="timeline-event timeline-event--details">
+                  <p class="card-meta timeline-event timeline-event--time" data-bind="text: timeString"></p>
+                  <p class="card-title timeline-event timeline-event--name" data-bind="text: name"></p>
+                  <p class="timeline-event timeline-event--description" data-bind="text: description"></p>
+                </div>
+                <!-- /ko -->
+              </div>
+              <div class="card-footer timeline-date--footer btn-group btn-group-block">
+                <button class="btn btn-light">Add</button>
+                <button class="btn btn-dark">Edit</button>
+                <button class="btn btn-dark">Delete</button>
+              </div>
             </div>
-            <div class="card-footer timeline-date--footer btn-group btn-group-block">
-              <button class="btn btn-light">Add</button>
-              <button class="btn btn-dark">Edit</button>
-              <button class="btn btn-dark">Delete</button>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <!-- /ko -->
-      <!-- ko ifnot: dates().length > 0 -->
-      <a href="#">Add an event</a>
-      <!-- /ko -->
+          </li>
+        </ul>
+        <!-- /ko -->
+        <!-- ko ifnot: dates().length > 0 -->
+        <a href="#">Add an event</a>
+        <!-- /ko -->
+      </div>
+    </div>
+    <div class="timeline-controls-container">
+      <div class="timeline-controls">
+        <div class="btn-group">
+          <button class="btn btn-dark timeline-control--left">&lt;</button>
+          <button class="btn btn-dark timeline-control--today">&diams;</button>
+          <button class="btn btn-dark timeline-control--right">&gt;</button>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-dark" data-bind="click: function(event) { $root.changeScaling(1) }">Small</button>
+          <button class="btn btn-dark" data-bind="click: function(event) { $root.changeScaling(2) }">Medium</button>
+          <button class="btn btn-dark" data-bind="click: function(event) { $root.changeScaling(3) }">Large</button>
+        </div>
+      </div>
     </div>
   </section>
 {% endblock %}
