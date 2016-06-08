@@ -67,19 +67,19 @@ function TimelineViewModel() {
     new TimelineCategory({ id: 1, name: "Work", color: '#33DD33', dates: [
       new TimelineDate({
         id: 0,
-        date: "25 May 2016",
+        date: "30 May 2016",
         events: [
           new TimelineEvent({
             id: 5,
             name: "Started work",
-            time: "25 May 2016 16:53:49",
+            time: "30 May 2016 16:53:49",
             description: "Started working on this weird but cool thingymajig.",
             isDeleted: false
           }),
           new TimelineEvent({
             id: 6,
             name: "Started work second title",
-            time: "25 May 2016 17:14:23",
+            time: "30 May 2016 17:14:23",
             description: "Started working more on this weird but cool thingymajig.",
             isDeleted: false
           })
@@ -87,12 +87,12 @@ function TimelineViewModel() {
       }),
       new TimelineDate({
         id: 1,
-        date: "26 May 2016",
+        date: "3 June 2016",
         events: [
           new TimelineEvent({
             id: 7,
             name: "Committed changes",
-            time: "26 May 2016 16:53:49",
+            time: "3 June 2016 16:53:49",
             description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
             isDeleted: false
           })
