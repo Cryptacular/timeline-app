@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "build": "npm install && bower install && gulp default"
+    "build": "npm install && bower install && gulp clean && gulp prod",
+    "dev": "npm install && bower install && gulp clean && gulp dev",
+    "localServer":  "cd dist && python -m SimpleHTTPServer 8000"
   },
   "repository": {
     "type": "git",
