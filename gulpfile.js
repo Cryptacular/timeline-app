@@ -2,6 +2,7 @@
 var gulp = require('gulp');
 
 // Include plugins
+var gulpif = require('gulp-if');
 var watch = require('gulp-watch');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -23,12 +24,6 @@ var mainBowerFiles = require('main-bower-files');
 var clean = require('gulp-clean');
 var jasmineBrowser = require('gulp-jasmine-browser');
 
-// Cleaning 'dist' folder
-gulp.task('clean', function () {
-	return gulp.src('dist', {read: false})
-		.pipe(clean());
-});
-
 // Debug or not
 var debug = false;
 
@@ -38,6 +33,12 @@ gulp.task('enableDebug', function() {
 
 gulp.task('disableDebug', function() {
   debug = false;
+});
+
+// Cleaning 'dist' folder
+gulp.task('clean', function () {
+	return gulp.src('dist', {read: false})
+		.pipe(clean());
 });
 
 // Copying static files to dist folder
@@ -68,31 +69,16 @@ gulp.task('nunjucks', function() {
 // JS hint
 gulp.task('jshint', function() {
   gulp.src('src/js/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
-});
-
-// Concatenate JS Files
-gulp.task('scriptsDebug', function() {
-    return gulp.src('src/js/*.js')
-      .pipe(concat('app.js'))
-      .pipe(gulp.dest('dist/js'));
+		.pipe(gulpif(debug, jshint()))
+		.pipe(gulpif(debug, jshint.reporter('jshint-stylish')));
 });
 
 // Concatenate & minify JS Files
 gulp.task('scripts', function() {
     return gulp.src('src/js/**/*.js')
       .pipe(concat('app.js'))
-      .pipe(rename({suffix: '.min'}))
-      // .pipe(uglify())
+			.pipe(gulpif(!debug, uglify()))
       .pipe(gulp.dest('dist/js'));
-});
-
-// Concatenate CSS
-gulp.task('cssDebug', function () {
-  return gulp.src('src/css/*.css')
-    .pipe(concatCss("vendor.css"))
-    .pipe(gulp.dest('dist/css/'));
 });
 
 // Concatenate & minify CSS
@@ -100,7 +86,7 @@ gulp.task('css', function () {
   return gulp.src('src/css/*.css')
     // .pipe(sourcemaps.init())
       .pipe(rename({suffix: '.min'}))
-      .pipe(cssnano())
+			.pipe(gulpif(!debug, cssnano()))
       .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
     // .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/css/'));
@@ -108,11 +94,12 @@ gulp.task('css', function () {
 
 // Compile SCSS
 gulp.task('sass', function() {
-    return sass('src/scss/app.scss', {style: 'compressed'})
-          .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions']}) ], { syntax: scss }))
-          .pipe(rename({suffix: '.min'}))
-        // .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/css'));
+	var minify = debug ? null : { style: 'compressed' };
+  return sass('src/scss/app.scss', minify)
+    .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions']}) ], { syntax: scss }))
+    .pipe(rename({suffix: '.min'}))
+    // .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/css'));
 });
 
 // Optimise images
@@ -153,5 +140,11 @@ gulp.task('watch', function() {
   gulp.watch('src/images/**/*', ['images']);
 });
 
+// Default Task
+gulp.task('default', ['static', 'bower', 'nunjucks', 'jshint', 'scripts', 'css', 'sass', 'images']);
+
+// Development Task
+gulp.task('dev', ['enableDebug', 'default', 'watch']);
+
 // Production Task
-gulp.task('default', ['static', 'bower', 'nunjucks', 'jshint', 'scripts', 'css', 'sass', 'images', 'watch']);
+gulp.task('prod', ['disableDebug', 'default']);
