@@ -9,7 +9,3 @@ Perhaps you already have a log of these, perhaps not. How about all the things y
 How about a log of all the blog posts you've written? How about the talks you've given? How about the insane grow spurts of your children?
 
 Whatever you choose to log (and let's face it, the more the better), Timeline is the way! Integrate with all your favourite online accounts and watch the magic happen!
-
-## Credit
-
-Credit where credit's due. Thanks to [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate) for their awesome web project standard setup!
