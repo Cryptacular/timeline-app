@@ -10,7 +10,7 @@
           <li class="timeline-date">
             <canvas width="8" height="8" class="clickable" data-bind="attr: { 'id': 'timeline-dot--' + $parent.id + '-' + id }, event: $root.paintDotForDate($parent.id, id, $parent.color()), click: $root.toggleDateDetails($parent.id, id)"></canvas>
             <canvas width="0" height="8" data-bind="attr: { 'id': 'timeline-line--' + $parent.id + '-' + id, 'width': $root.findTimeToNextDate($parent.id, id) }, event: $root.paintLineForDate($parent.id, id, $parent.color())"></canvas>
-            <div class="card timeline-date--bubble clickable" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.toggleDateDetails($parent.id, event.id) }">
+            <div class="card timeline-date--card clickable" data-bind="attr: { 'id': 'timeline-details--' + id }, click: function(event) { $root.toggleDateDetails($parent.id, event.id) }">
               <div class="card-header">
                 <span class="timeline-date--date" data-bind="text: dateString"></span>
               </div>

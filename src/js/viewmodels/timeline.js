@@ -6,19 +6,19 @@ function TimelineViewModel() {
     new TimelineCategory({ id: 0, name: "Default", color: '#DD3333', dates: [
       new TimelineDate({
         id: 0,
-        date: "25 May 2016",
+        date: "20160525",
         events: [
           new TimelineEvent({
             id: 0,
             name: "Started work",
-            time: "25 May 2016 16:53:49",
+            time: "20160525 16:53:49",
             description: "Started working on this weird but cool thingymajig.",
             isDeleted: false
           }),
           new TimelineEvent({
             id: 1,
             name: "Started work second title",
-            time: "25 May 2016 17:14:23",
+            time: "20160525 17:14:23",
             description: "Started working more on this weird but cool thingymajig.",
             isDeleted: false
           })
@@ -26,12 +26,12 @@ function TimelineViewModel() {
       }),
       new TimelineDate({
         id: 1,
-        date: "26 May 2016",
+        date: "20160526",
         events: [
           new TimelineEvent({
             id: 2,
             name: "Committed changes",
-            time: "26 May 2016 16:53:49",
+            time: "20160526 16:53:49",
             description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
             isDeleted: false
           })
@@ -39,12 +39,12 @@ function TimelineViewModel() {
       }),
       new TimelineDate({
         id: 2,
-        date: "28 May 2016",
+        date: "20160528",
         events: [
           new TimelineEvent({
             id: 3,
             name: "Made some other changes",
-            time: "28 May 2016 16:53:49",
+            time: "20160528 16:53:49",
             description: "Doing things and stuff yup.",
             isDeleted: false
           })
@@ -52,34 +52,54 @@ function TimelineViewModel() {
       }),
       new TimelineDate({
         id: 3,
-        date: "1 June 2016",
+        date: "20160601",
         events: [
           new TimelineEvent({
             id: 4,
             name: "Undid stuff",
-            time: "1 June 2016 16:53:49",
+            time: "20160601 16:53:49",
             description: "Ctrl+Z and all that jazz.",
             isDeleted: false
           })
         ]
-      })
-    ]}),
-    new TimelineCategory({ id: 1, name: "Work", color: '#33DD33', dates: [
+      }),
       new TimelineDate({
-        id: 0,
-        date: "30 May 2016",
+        id: 5,
+        date: "20160605",
         events: [
           new TimelineEvent({
             id: 5,
-            name: "Started work",
-            time: "30 May 2016 16:53:49",
+            name: "Added something or rather",
+            time: "20160605 16:53:49",
             description: "Started working on this weird but cool thingymajig.",
             isDeleted: false
           }),
           new TimelineEvent({
             id: 6,
             name: "Started work second title",
-            time: "30 May 2016 17:14:23",
+            time: "20160605 17:14:23",
+            description: "Started working more on this weird but cool thingymajig.",
+            isDeleted: false
+          })
+        ]
+      }),
+    ]}),
+    new TimelineCategory({ id: 1, name: "Work", color: '#33DD33', dates: [
+      new TimelineDate({
+        id: 0,
+        date: "20160530",
+        events: [
+          new TimelineEvent({
+            id: 5,
+            name: "Started work",
+            time: "20160530 16:53:49",
+            description: "Started working on this weird but cool thingymajig.",
+            isDeleted: false
+          }),
+          new TimelineEvent({
+            id: 6,
+            name: "Started work second title",
+            time: "20160530 17:14:23",
             description: "Started working more on this weird but cool thingymajig.",
             isDeleted: false
           })
@@ -87,19 +107,18 @@ function TimelineViewModel() {
       }),
       new TimelineDate({
         id: 1,
-        date: "3 June 2016",
+        date: "20160603",
         events: [
           new TimelineEvent({
             id: 7,
             name: "Committed changes",
-            time: "3 June 2016 16:53:49",
+            time: "20160603 16:53:49",
             description: "After making some changes, I committed them and all that cool jazzy-like shizzle fits.",
             isDeleted: false
           })
         ]
       })
     ]})
-    // new TimelineCategory({ id: 2, name: "Empty", color: '#33DD33'})
   ]);
 
   self.scaling = ko.observable(new TimelineScaling(1));
@@ -237,7 +256,7 @@ function TimelineViewModel() {
     var clicked = $("#timeline-category--" + categoryId).find("#timeline-details--" + id);
     var isCurrentlyEnabled = clicked.hasClass('active');
 
-    $(".timeline-date--bubble.active").removeClass('active');
+    $(".timeline-date--card.active").removeClass('active');
 
     if (!isCurrentlyEnabled) {
       clicked.toggleClass('active');

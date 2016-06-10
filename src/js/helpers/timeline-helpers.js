@@ -1,1 +1,1 @@
-var momentFormat = "d MMM YYYY HH:mm:ss";
+var momentFormat = "YYYYMMDD HH:mm:ss";
